@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title> Profile card</title>
+</head>
+<style>
+.pro-card {
+  
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+.name { 
+  color: black;
+  font-size: 18px;
+}
+</style>
+<body>
+    
+    <fieldset>
+        <legend>PROFILE CARD</legend>
+        <div id ="pro-card">
+
+            </div>
+    <script>
+        const data = JSON.parse(localStorage.getItem('items'))
+        var gem=`
+        
+        <img src="${data.avatar_url}" alt="${data.login}" width="193" height="130"/>
+        <h1 class="name"> ${data.login}</h1>
+        <p>${data.id} </h1>
+        <p>${data.type} </p>
+        <p>${data.site_admin}</p>
+        `
+        document.getElementById("pro-card").innerHTML+=gem;
+        gem="";
+    
+        </script>
+</fieldset>
+
+</body>
+</html>

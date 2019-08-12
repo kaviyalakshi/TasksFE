@@ -1,0 +1,25 @@
+var a=[1,3,5];
+var m;
+m=a.push(7,5);
+console.log(m)
+// a.push(), a.pop()//returns value which is popped //a.unshift()(from begg) //a.shift()
+x=a.splice(2,0)
+console.log(x)
+y=a.slice()//copies 1st one mattum deep copy vera ellam shallow copy
+//a.slice(2) start from two a.slice(2,5)// from 2 to 4 
+j=[].concat(a,[1,2,3]);
+console.log(j)
+k=[1,4,6,8,4,6,0,4];
+l=k.includes(4);
+console.log(l)
+// q=a.indexof(4)// returns the first index
+// w=lastindexof(3)//returns the last index
+//findIndex,find,filter,map
+//some()//if some values of the field satisfy that condition,every//for all the values in that field should satisfy the condition
+//array.fill(0), fills all value with that number
+// say new array you cant do arr(5).map(...)
+//so array(n).fill(0).map(item,i)=> i
+//join split //reduce reduce right 
+//symbol set weakset 
+//class 
+console.log(...[1, 2, 3].keys())

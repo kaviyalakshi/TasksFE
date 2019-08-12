@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<head>
+    <title>Convert JSON Data to HTML Table</title>
+  
+    
+</head>
+<style>
+        #tble {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        #tble td, #tble th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        #tble tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #tble tr:hover {background-color: #ddd;}
+        
+        #tble th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #4CAF50;
+          color: white;
+        }
+        </style>
+<body>
+
+    <input type="text" id="txt" placeholder="Enter a text to search" onkeyup="myFunction()">
+    <div id="show-data">
+    <table id="tble">  
+        <thead>
+            <tr class="header">
+        <th>login</th>
+    </tr>
+        </thead>
+        <tbody id= "one">
+
+        </tbody>
+    
+</table>
+</div>
+    <script>
+
+
+            async function fetchdata(ur)
+             {
+                            try{
+                            
+                              dat = await fetch((ur))
+                              response = await dat.json();
+                              console.log(response);
+                              return response;
+            
+                            }
+                              catch(e)
+                              {
+                                console.log(e);
+                              }
+                            }
+                            
+                            fun= fetchdata('https://api.github.com/users');
+                            console.log(fun);
+                            
+                            let array = [];
+                            function storeData(index){
+                             debugger;
+                             localStorage.setItem('items', JSON.stringify(array[index]))
+ 
+                               }
+                            
+                             fun.then(json_obj => {
+                                console.log(json_obj);
+                                array = json_obj
+                                json_obj.forEach((element,index) => {
+                                    
+                                
+                                var h_code=` <tr>
+                                  <td><a href='profile.html' onclick='storeData(${index})' > ${element.login}</a></td>
+                                  </tr>
+                                    `;
+                                  
+
+                                  
+
+                                  document.getElementById("one").innerHTML+=h_code;
+                                  h_code="";
+                                });
+                              });
+                              
+
+                              /*function getUserData(login)
+                              {
+                                console.log(array[login])
+                                 var cod = JSON.stringify(array[login])
+                                
+                                  document.getElementById("show-data").innerHTML=cod;
+                                  cod="";
+                              }
+                              */
+
+                              function myFunction() {
+                              var input, filter, table, tr, td, i, txtValue;
+                                input = document.getElementById("txt");
+                                filter = input.value.toUpperCase();
+                                table = document.getElementById("tble");
+                                tr = table.getElementsByTagName("tr");
+                                for (i = 0; i < tr.length; i++) {
+                                td = tr[i].getElementsByTagName("td")[0];
+                                if (td) {
+                                    txtValue = td.textContent || td.innerText;
+                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                        tr[i].style.display = "";
+                                    } else {
+                                    tr[i].style.display = "none";
+                       }
+                     }       
+                   }
+                 }
+         
+                        </script>
+                    
+    <!--<input type="text" name="tb" id ="tb1" />
+    <button type="submit">search</button>
+    -->
+
+
+
+</body>
+
+ </html>

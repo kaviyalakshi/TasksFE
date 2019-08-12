@@ -1,0 +1,24 @@
+n=3;
+a=n*n;
+ s=Array(n).fill(0).map((item,index)=>{ 
+return Array(n).fill(0).map((item1,index1 ) => {
+    return (n*index)+index1
+
+})
+     
+})
+p = Array(n).fill().map((item, index) => {
+                return Array(n).fill().map((i, index1) => {return (n * index1) + index})
+});
+console.log(s);
+console.log(p);
+
+ e = s.map((item, index, array) => {
+       return array[index][index]
+    })
+     f = s.map((item, index, array) => {
+       return array[index][n - index - 1]
+    })
+    console.log(e)
+    console.log(f)
+

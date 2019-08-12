@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API Response</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+
+<style>
+input[type="text"] {
+       width: 130px;
+       box-sizing: border-box;
+       border: 2px solid #ccc;
+       border-radius: 4px;
+       font-size: 16px;
+       background-color: white;
+       background-image: url("search-icon.png");
+       background-position: 1px 1px;
+       background-repeat: no-repeat;
+       background-size: 35px 35px;
+       padding: 12px 20px 12px 40px;
+       margin-bottom: 20px;
+       -webkit-transition: width 0.4s ease-in-out;
+       transition: width 0.4s ease-in-out;
+     }
+
+     input[type="text"]:focus {
+       width: 50%;
+     }
+</style>
+</head>
+
+
+<body>
+
+
+        <div class="container">
+                <input type="text" name="search" id="search-text" onkeyup="searchFunction()" placeholder="Search.." />  
+        </div>
+        <div class ="container">       
+                <table class="table table-bordered" id="tble">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Mass</th>
+                      <th>Height</th>
+                      <th>Gender</th>
+                    </tr>
+                  </thead>
+                  <tbody id = "one">
+                    
+                  </tbody>
+                </table>
+              </div>
+    <script>
+    async function fetchUsers(endpoint) {
+
+        try{
+            const raw_data = await fetch(endpoint);
+            var data =  await raw_data.json();
+    
+            console.log(data);
+            return data.results;
+
+        }catch(e){
+            console.log(e);
+        }
+        
+    
+    }
+
+    const obj = fetchUsers('https://swapi.co/api/people/');
+    console.log(obj);
+    obj.then(json_data => {
+    
+        json_data.forEach(element => {
+            //console.log(element.name);
+            var h_code = `<tr>
+                      <td>${element.name}</td>
+                      <td>${element.mass}</td>
+                      <td>${element.height}</td>
+                      <td>${element.gender}</td>
+                    </tr>`;
+            document.getElementById("one").innerHTML += h_code
+            h_code = "";
+
+        });
+        console.log(names);
+
+    });
+
+
+function searchFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search-text");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tble");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+
+    </script> 
+</body>
+</html>
